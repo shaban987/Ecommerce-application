@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block 'main' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-4"><!--Product and filter strat-->
+            <div class="col-md-4 bg-warning-subtle"><!--FILTER START-->
+                <h4>Filter by category</h4>
+                <hr>
+                <p><a class="anchor" href="cartfiler/1">Buy Mobile</a></p>
+                <p><a class="anchor" href="#">Buy Shoes</a></p>
+                <p><a class="anchor" href="#">Buy Cloths</a></p>
+
+                <h5>Filte by price</h5>
+                <hr>
+                <div class="mb-3">
+                    <form action="/range">
+                        <label for="Input1" class="form-label">Min Value:</label>
+                        <input type="number" class="form-control" id="Input1" placeholder="Min value">
+                        <label for="Input2" class="form-label">Max Value:</label>
+                        <input type="number" class="form-control" id="Input2" placeholder="Max value">
+                        <div class="mb-3">
+
+                            <input type="submit" value="Submit" class="btn btn-outline-success">
+                        </div>
+                    </form>
+                </div>
+                <h5>Filter by price</h5>
+                <hr>
+                <p><a class="anchor" href="/sort/0">Low to High</a></p>
+                <p><a class="anchor" href="/sort/1">High to Low</a></p>
+            </div> <!--  filter end -->
+
+            
+
+            <!--product start-->
+            <div class="col shadow mt-4 p-4 mx-auto">
+                <div class="row">
+                    <h4>product</h4>
+                    {% for x in products %}
+
+                    <div class="col-md-4 mt-4"><!--product1 start-->
+                        <div class="card" style="width: 100%;">
+                            <img src="{{x.pimage.url}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{x.name}}</h5>
+                                <p class="card-text">₹ {{x.price}}</p>
+                                <!-- <p class="card-text">{{x.cat}}</p> -->
+                                {% if x.cat == 1 %}
+                                    <p class="card-text">Mobile</p>
+                                {% elif x.cat == 2 %}
+                                    <p class="card-text">shoes</p>
+                                {% else %}
+                                    <p class="card-text">Cloths</p>
+                                {% endif %}
+                                <a href="/pdetails/{{x.id}}" class="btn btn-outline-success">See Detail</a>
+                            </div>
+                        </div>
+                    </div><!--  product1 end -->
+                    {% endfor %}
+
+
+
+
+
+                </div>
+</div>
+            </div> <!--  product and filter end -->
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
+
+
+{% endblock 'main' %}
